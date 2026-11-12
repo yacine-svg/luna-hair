@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -118,8 +118,8 @@
     color: var(--gold-pale);
     will-change: opacity, transform;
   }
-  .results span:nth-child(2) { font-style: italic; color: var(--gold); padding-left: .6em; }
-  .results span:nth-child(3) { padding-left: 1.2em; }
+  .results span:nth-child(2) { font-style: italic; color: var(--gold); padding-inline-start: .6em; }
+  .results span:nth-child(3) { padding-inline-start: 1.2em; }
 
   /* order panel */
   .order .facts {
@@ -128,7 +128,7 @@
     font-size: 14px; letter-spacing: .08em; color: var(--muted);
   }
   .order .facts li { display: flex; align-items: center; gap: 10px; }
-  .order .facts li + li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin-left: -12px; }
+  .order .facts li + li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); margin-inline-start: -12px; }
   .cta {
     display: inline-flex; align-items: center; gap: 12px;
     margin-top: 34px;
@@ -187,8 +187,6 @@
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   .order-section {
-    --font-ar-display: "Amiri", "Noto Naskh Arabic", serif;
-    --font-ar: "Tajawal", "Segoe UI", Tahoma, sans-serif;
     --field: #14100c;
     --line: rgba(214,176,106,.28);
     --error: #e88a74;
@@ -197,7 +195,7 @@
     background:
       radial-gradient(60% 50% at 85% 0%, rgba(122,69,20,.28), transparent 70%),
       var(--night);
-    font-family: var(--font-ar);
+    font-family: var(--font-body);
   }
   .order-wrap {
     max-width: 1080px; margin: 0 auto;
@@ -205,12 +203,11 @@
     gap: clamp(32px, 6vw, 80px); align-items: start;
   }
   .order-intro h2 {
-    font-family: var(--font-ar-display);
-    font-size: clamp(38px, 5vw, 58px); line-height: 1.25; font-weight: 700;
+    font-size: clamp(38px, 5vw, 58px); line-height: 1.15;
   }
-  .order-intro .fr {
-    margin: 10px 0 0; font-family: var(--font-display); font-style: italic;
-    font-size: 20px; color: var(--gold);
+  .order-intro .sub {
+    margin: 12px 0 0; font-family: var(--font-display); font-style: italic;
+    font-size: 21px; color: var(--gold);
   }
   .order-intro p { font-size: 17px; line-height: 1.9; color: var(--text); margin: 22px 0 0; max-width: 34ch; }
   .steps { list-style: none; padding: 0; margin: 34px 0 0; display: grid; gap: 14px; }
@@ -242,15 +239,17 @@
     padding: 13px 14px;
     transition: border-color .2s ease, box-shadow .2s ease;
   }
-  .order-form input[type="tel"] { direction: ltr; text-align: right; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .order-form input[type="tel"] { direction: ltr; text-align: left; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  :root[dir="rtl"] .order-form input[type="tel"] { text-align: right; }
   .order-form textarea { min-height: 84px; resize: vertical; }
   .order-form select {
     appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
-    background-position: 18px 55%, 12px 55%;
-    background-size: 6px 6px; background-repeat: no-repeat;
-    padding-left: 34px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23d6b06a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-size: 12px 8px;
+    background-position: right 14px center;
+    padding-right: 36px;
   }
+  :root[dir="rtl"] .order-form select { background-position: left 14px center; padding-right: 14px; padding-left: 36px; }
   .order-form input:focus, .order-form select:focus, .order-form textarea:focus {
     outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(214,176,106,.18);
   }
@@ -269,7 +268,7 @@
   .chip input:checked + span { background: rgba(214,176,106,.16); border-color: var(--gold); color: var(--gold-pale); }
   .chip input:focus-visible + span { outline: 2px solid var(--gold-pale); outline-offset: 2px; }
   .submit-row { grid-column: 1 / -1; display: grid; gap: 12px; margin-top: 6px; }
-  .order-form .cta { margin-top: 0; justify-content: center; border: 0; cursor: pointer; font-family: var(--font-ar); font-size: 17px; font-weight: 700; letter-spacing: 0; }
+  .order-form .cta { margin-top: 0; justify-content: center; border: 0; cursor: pointer; font-family: var(--font-body); font-size: 17px; font-weight: 500; letter-spacing: .02em; }
   .submit-note { margin: 0; font-size: 14px; line-height: 1.7; color: var(--muted); text-align: center; }
   .sent {
     display: none; grid-column: 1 / -1;
@@ -286,6 +285,43 @@
   @media (max-width: 560px) {
     .order-form { grid-template-columns: 1fr; }
   }
+
+  /* ---------- language switch ---------- */
+  .lang-switch {
+    position: fixed; top: 16px; right: 16px; z-index: 50;
+    display: flex; gap: 2px; padding: 4px;
+    border: 1px solid rgba(214,176,106,.3); border-radius: 999px;
+    background: rgba(9,7,6,.6);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  }
+  .lang-switch button {
+    min-width: 40px; height: 32px; padding: 0 10px;
+    border: 0; border-radius: 999px; background: transparent;
+    color: var(--muted); cursor: pointer;
+    font-family: "Jost", system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: .08em;
+    transition: background .2s ease, color .2s ease;
+  }
+  .lang-switch button[lang="ar"] { font-family: "Tajawal", "Segoe UI", sans-serif; font-size: 16px; letter-spacing: 0; }
+  .lang-switch button:hover { color: var(--gold-pale); }
+  .lang-switch button[aria-pressed="true"] { background: var(--gold); color: #1a1208; }
+  .lang-switch button:focus-visible { outline: 2px solid var(--gold-pale); outline-offset: 2px; }
+
+  /* brand mark stays in Latin type in every language */
+  h1.brand { font-family: "Cormorant Garamond", "Iowan Old Style", Georgia, serif; }
+  h1.brand .caps { font-family: "Jost", system-ui, sans-serif; }
+
+  /* ---------- Arabic ---------- */
+  :root[lang="ar"] {
+    --font-display: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+    --font-body: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  }
+  /* Arabic letters must join: no tracking anywhere except the Latin brand caps */
+  :root[lang="ar"] body *:not(.caps):not(.lang-switch button) { letter-spacing: 0; }
+  :root[lang="ar"] h2 { line-height: 1.3; font-weight: 700; }
+  :root[lang="ar"] h2 em, :root[lang="ar"] .results span, :root[lang="ar"] .order-intro .sub { font-style: normal; }
+  :root[lang="ar"] .eyebrow, :root[lang="ar"] .rail li, :root[lang="ar"] .hint, :root[lang="ar"] .loader { text-transform: none; font-size: 14px; }
+  :root[lang="ar"] .results span { line-height: 1.35; white-space: nowrap; font-size: clamp(44px, 6.4vw, 92px); }
+  :root[lang="ar"] .lede { line-height: 1.9; }
 
   /* ---------- footer after the story ---------- */
   footer {
@@ -306,7 +342,7 @@
     .beat, .beat.order { top: auto; bottom: 64px; transform: none; }
     .rail { display: none; }
     .hint { bottom: 18px; }
-    .results span { padding-left: 0 !important; }
+    .results span { padding-inline-start: 0 !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     .hint i { animation: none; }
@@ -316,6 +352,12 @@
 </head>
 <body>
 
+<nav class="lang-switch" aria-label="Language / Langue / اللغة">
+  <button type="button" data-lang="ar" lang="ar">ع</button>
+  <button type="button" data-lang="fr" lang="fr">FR</button>
+  <button type="button" data-lang="en" lang="en">EN</button>
+</nav>
+
 <section class="story" id="story" aria-label="Luna Hair, l'histoire de l'élixir">
   <div class="stage">
     <canvas id="film" aria-hidden="true"></canvas>
@@ -323,57 +365,57 @@
 
     <!-- Beat 1: hero (visible on load) -->
     <div class="beat" data-in="-1" data-out="0.11">
-      <p class="eyebrow">Elixir for Long &amp; Strong Hair</p>
-      <h1><span class="script">Luna</span><span class="caps">Hair</span></h1>
-      <p class="lede">L'excellence au service de vos cheveux.</p>
+      <p class="eyebrow" data-i18n="heroEyebrow">Elixir for Long &amp; Strong Hair</p>
+      <h1 class="brand"><span class="script">Luna</span><span class="caps">Hair</span></h1>
+      <p class="lede" data-i18n="heroLede">L'excellence au service de vos cheveux.</p>
     </div>
 
     <!-- Beat 2: natural care -->
     <div class="beat" data-in="0.15" data-out="0.33">
-      <p class="eyebrow">100 % naturel</p>
-      <h2>Soin naturel <em>haut de gamme</em></h2>
-      <p class="lede">Une huile pensée pour des cheveux longs, forts et pleins de vie.</p>
+      <p class="eyebrow" data-i18n="b2Eyebrow">100 % naturel</p>
+      <h2 data-i18n-html="b2Title">Soin naturel <em>haut de gamme</em></h2>
+      <p class="lede" data-i18n="b2Lede">Une huile pensée pour des cheveux longs, forts et pleins de vie.</p>
     </div>
 
     <!-- Beat 3: the drop -->
     <div class="beat" data-in="0.40" data-out="0.60">
-      <p class="eyebrow">Le rituel</p>
-      <h2>Une goutte.<br><em>Un rituel.</em></h2>
-      <p class="lede">Une goutte d'élixir, et votre soin commence.</p>
+      <p class="eyebrow" data-i18n="b3Eyebrow">Le rituel</p>
+      <h2 data-i18n-html="b3Title">Une goutte.<br><em>Un rituel.</em></h2>
+      <p class="lede" data-i18n="b3Lede">Une goutte d'élixir, et votre soin commence.</p>
     </div>
 
     <!-- Beat 4: results, words staggered -->
     <div class="beat" data-in="0.645" data-out="0.86" id="resultsBeat">
-      <p class="eyebrow">Ce que vous recherchez</p>
-      <div class="results" aria-label="Pousse, densité, zones comblées">
-        <span data-stagger="0">Pousse</span>
-        <span data-stagger="1">Densité</span>
-        <span data-stagger="2">Zones comblées</span>
+      <p class="eyebrow" data-i18n="b4Eyebrow">Ce que vous recherchez</p>
+      <div class="results" data-i18n-aria="resultsAria" aria-label="Pousse, densité, zones comblées">
+        <span data-stagger="0" data-i18n="r1">Pousse</span>
+        <span data-stagger="1" data-i18n="r2">Densité</span>
+        <span data-stagger="2" data-i18n="r3">Zones comblées</span>
       </div>
     </div>
 
     <!-- Beat 5: order, sits on the empty left half of the final frame -->
     <div class="beat order" data-in="0.925" data-out="2">
-      <p class="eyebrow">Commande en privé</p>
-      <h2>Votre élixir<br><em>vous attend</em></h2>
+      <p class="eyebrow" data-i18n="b5Eyebrow">Commande en privé</p>
+      <h2 data-i18n-html="b5Title">Votre élixir<br><em>vous attend</em></h2>
       <ul class="facts">
-        <li>Flacon 60 ml</li>
-        <li>Livraison disponible</li>
+        <li data-i18n="fact1">Flacon 60 ml</li>
+        <li data-i18n="fact2">Livraison disponible</li>
       </ul>
-      <a class="cta" href="#commande">Commander maintenant</a>
-      <p class="contact">
+      <a class="cta" href="#commande" data-i18n="ctaOrder">Commander maintenant</a>
+      <p class="contact" data-i18n-html="contact">
         WhatsApp : <strong>05 49 48 58 69</strong><br>
         Instagram : Luna magic hair · Facebook : Huile Luna
       </p>
     </div>
 
-    <div class="hint" id="hint"><span>Faites défiler</span><i></i></div>
+    <div class="hint" id="hint"><span data-i18n="hint">Faites défiler</span><i></i></div>
 
     <ol class="rail" id="rail" aria-hidden="true">
-      <li data-from="0">Éclat</li>
-      <li data-from="0.367">Rituel</li>
-      <li data-from="0.634">Résultat</li>
-      <li data-from="0.9">Commande</li>
+      <li data-from="0" data-i18n="rail1">Éclat</li>
+      <li data-from="0.367" data-i18n="rail2">Rituel</li>
+      <li data-from="0.634" data-i18n="rail3">Résultat</li>
+      <li data-from="0.9" data-i18n="rail4">Commande</li>
     </ol>
 
     <div class="loader" id="loader">Chargement 0 %</div>
@@ -381,116 +423,301 @@
   </div>
 </section>
 
-<section class="order-section" id="commande" dir="rtl" lang="ar" aria-labelledby="orderTitle">
+<section class="order-section" id="commande" aria-labelledby="orderTitle">
   <div class="order-wrap">
     <div class="order-intro">
-      <h2 id="orderTitle">اطلبوا زيت لونا هير</h2>
-      <p class="fr">Commande en privé · Livraison disponible</p>
-      <p>املأ المعلومات مرة واحدة، وتصلنا طلبيتك كاملة على واتساب. نرد عليك لنؤكد إذا كان الزيت يناسب حالتك وكم قارورة تحتاج. مرحباً بالرجال والنساء.</p>
+      <h2 id="orderTitle" data-i18n="oTitle">اطلبوا زيت لونا هير</h2>
+      <p class="sub" data-i18n="oSub">Commande en privé · Livraison disponible</p>
+      <p data-i18n="oIntro">املأ المعلومات مرة واحدة، وتصلنا طلبيتك كاملة على واتساب. نرد عليك لنؤكد إذا كان الزيت يناسب حالتك وكم قارورة تحتاج. مرحباً بالرجال والنساء.</p>
       <ol class="steps">
-        <li><b>١</b> املأ الاستمارة واضغط إرسال</li>
-        <li><b>٢</b> يفتح واتساب برسالة جاهزة، أرسلها مع صورة واضحة لشعرك</li>
-        <li><b>٣</b> نرد عليك ونؤكد الطلب ثم نرسله لك</li>
+        <li><b data-i18n="n1">١</b> <span data-i18n="s1">املأ الاستمارة واضغط إرسال</span></li>
+        <li><b data-i18n="n2">٢</b> <span data-i18n="s2">يفتح واتساب برسالة جاهزة، أرسلها مع صورة واضحة لشعرك</span></li>
+        <li><b data-i18n="n3">٣</b> <span data-i18n="s3">نرد عليك ونؤكد الطلب ثم نرسله لك</span></li>
       </ol>
     </div>
 
     <form class="order-form" id="orderForm" novalidate>
       <div class="field">
-        <label for="f-name">الاسم واللقب</label>
+        <label for="f-name" data-i18n="lName">الاسم واللقب</label>
         <input type="text" id="f-name" name="name" autocomplete="name" required>
-        <span class="err">اكتب الاسم واللقب.</span>
+        <span class="err" data-i18n="eName">اكتب الاسم واللقب.</span>
       </div>
       <div class="field">
-        <label for="f-phone">رقم الهاتف</label>
+        <label for="f-phone" data-i18n="lPhone">رقم الهاتف</label>
         <input type="tel" id="f-phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="0550 12 34 56" required>
-        <span class="err">اكتب رقماً من 10 أرقام يبدأ بـ 05 أو 06 أو 07.</span>
+        <span class="err" data-i18n="ePhone">اكتب رقماً من 10 أرقام يبدأ بـ 05 أو 06 أو 07.</span>
       </div>
 
       <div class="field">
-        <label for="f-wilaya">الولاية</label>
-        <select id="f-wilaya" name="wilaya" required><option value="">اختر الولاية</option></select>
-        <span class="err">اختر الولاية.</span>
+        <label for="f-wilaya" data-i18n="lWilaya">الولاية</label>
+        <select id="f-wilaya" name="wilaya" required><option value="" data-i18n="pWilaya">اختر الولاية</option></select>
+        <span class="err" data-i18n="eWilaya">اختر الولاية.</span>
       </div>
       <div class="field">
-        <label for="f-commune">البلدية</label>
+        <label for="f-commune" data-i18n="lCommune">البلدية</label>
         <input type="text" id="f-commune" name="commune" required>
-        <span class="err">اكتب البلدية.</span>
+        <span class="err" data-i18n="eCommune">اكتب البلدية.</span>
       </div>
 
       <div class="field full">
-        <span class="label" id="l-delivery">نوع التوصيل</span>
+        <span class="label" id="l-delivery" data-i18n="lDelivery">نوع التوصيل</span>
         <div class="chips" role="radiogroup" aria-labelledby="l-delivery">
-          <label class="chip"><input type="radio" name="delivery" value="للمنزل" checked><span>للمنزل</span></label>
-          <label class="chip"><input type="radio" name="delivery" value="للمكتب (Stop desk)"><span>للمكتب (Stop desk)</span></label>
+          <label class="chip"><input type="radio" name="delivery" value="للمنزل" checked><span data-i18n="dHome">للمنزل</span></label>
+          <label class="chip"><input type="radio" name="delivery" value="للمكتب (Stop desk)"><span data-i18n="dDesk">للمكتب (Stop desk)</span></label>
         </div>
       </div>
       <div class="field full" id="addressField">
-        <label for="f-address">العنوان الكامل</label>
-        <input type="text" id="f-address" name="address" autocomplete="street-address" placeholder="الحي، رقم العمارة أو المنزل">
-        <span class="err">اكتب العنوان الكامل للتوصيل إلى المنزل.</span>
+        <label for="f-address" data-i18n="lAddress">العنوان الكامل</label>
+        <input type="text" id="f-address" name="address" autocomplete="street-address" data-i18n-ph="phAddress" placeholder="الحي، رقم العمارة أو المنزل">
+        <span class="err" data-i18n="eAddress">اكتب العنوان الكامل للتوصيل إلى المنزل.</span>
       </div>
 
       <div class="field">
-        <span class="label" id="l-gender">أنت</span>
+        <span class="label" id="l-gender" data-i18n="lGender">أنت</span>
         <div class="chips" role="radiogroup" aria-labelledby="l-gender">
-          <label class="chip"><input type="radio" name="gender" value="امرأة" checked><span>امرأة</span></label>
-          <label class="chip"><input type="radio" name="gender" value="رجل"><span>رجل</span></label>
+          <label class="chip"><input type="radio" name="gender" value="امرأة" checked><span data-i18n="gF">امرأة</span></label>
+          <label class="chip"><input type="radio" name="gender" value="رجل"><span data-i18n="gM">رجل</span></label>
         </div>
       </div>
       <div class="field">
-        <label for="f-since">منذ متى تلاحظ المشكلة؟</label>
+        <label for="f-since" data-i18n="lSince">منذ متى تلاحظ المشكلة؟</label>
         <select id="f-since" name="since">
-          <option value="أقل من 6 أشهر">أقل من 6 أشهر</option>
-          <option value="من 6 أشهر إلى سنة">من 6 أشهر إلى سنة</option>
-          <option value="أكثر من سنة">أكثر من سنة</option>
+          <option value="أقل من 6 أشهر" data-i18n="since1">أقل من 6 أشهر</option>
+          <option value="من 6 أشهر إلى سنة" data-i18n="since2">من 6 أشهر إلى سنة</option>
+          <option value="أكثر من سنة" data-i18n="since3">أكثر من سنة</option>
         </select>
       </div>
 
       <div class="field full" id="zonesField">
-        <span class="label" id="l-zones">ماذا تريد أن تعالج؟ <span class="opt">(اختر واحداً أو أكثر)</span></span>
+        <span class="label" id="l-zones"><span data-i18n="lZones">ماذا تريد أن تعالج؟</span> <span class="opt" data-i18n="optZones">(اختر واحداً أو أكثر)</span></span>
         <div class="chips" aria-labelledby="l-zones">
-          <label class="chip"><input type="checkbox" name="zones" value="فراغات في مقدمة الرأس"><span>فراغات في مقدمة الرأس</span></label>
-          <label class="chip"><input type="checkbox" name="zones" value="فراغات في الجوانب"><span>فراغات في الجوانب</span></label>
-          <label class="chip"><input type="checkbox" name="zones" value="خفة أعلى الرأس"><span>خفة أعلى الرأس</span></label>
-          <label class="chip"><input type="checkbox" name="zones" value="تساقط الشعر"><span>تساقط الشعر</span></label>
-          <label class="chip"><input type="checkbox" name="zones" value="تطويل وتكثيف الشعر"><span>تطويل وتكثيف الشعر</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="فراغات في مقدمة الرأس"><span data-i18n="z1">فراغات في مقدمة الرأس</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="فراغات في الجوانب"><span data-i18n="z2">فراغات في الجوانب</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="خفة أعلى الرأس"><span data-i18n="z3">خفة أعلى الرأس</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="تساقط الشعر"><span data-i18n="z4">تساقط الشعر</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="تطويل وتكثيف الشعر"><span data-i18n="z5">تطويل وتكثيف الشعر</span></label>
         </div>
-        <span class="err">اختر واحداً على الأقل.</span>
+        <span class="err" data-i18n="eZones">اختر واحداً على الأقل.</span>
       </div>
 
       <div class="field">
-        <label for="f-qty">عدد القارورات</label>
+        <label for="f-qty" data-i18n="lQty">عدد القارورات</label>
         <select id="f-qty" name="qty">
-          <option value="لا أعرف، أريد نصيحتكم">لا أعرف، أريد نصيحتكم</option>
+          <option value="لا أعرف، أريد نصيحتكم" data-i18n="qAdvise">لا أعرف، أريد نصيحتكم</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4 أو أكثر">4 أو أكثر</option>
+          <option value="4 أو أكثر" data-i18n="q4">4 أو أكثر</option>
         </select>
       </div>
       <div class="field">
-        <label for="f-phone2">رقم هاتف ثانٍ <span class="opt">(اختياري)</span></label>
+        <label for="f-phone2"><span data-i18n="lPhone2">رقم هاتف ثانٍ</span> <span class="opt" data-i18n="optional">(اختياري)</span></label>
         <input type="tel" id="f-phone2" name="phone2" inputmode="numeric" placeholder="0660 12 34 56">
-        <span class="err">الرقم الثاني غير صحيح.</span>
+        <span class="err" data-i18n="ePhone2">الرقم الثاني غير صحيح.</span>
       </div>
       <div class="field full">
-        <label for="f-note">ملاحظة <span class="opt">(اختياري)</span></label>
-        <textarea id="f-note" name="note" placeholder="مثلاً: اتصلوا بعد الساعة 5 مساءً"></textarea>
+        <label for="f-note"><span data-i18n="lNote">ملاحظة</span> <span class="opt" data-i18n="optional">(اختياري)</span></label>
+        <textarea id="f-note" name="note" data-i18n-ph="phNote" placeholder="مثلاً: اتصلوا بعد الساعة 5 مساءً"></textarea>
       </div>
 
       <div class="submit-row">
-        <button type="submit" class="cta">إرسال الطلب عبر واتساب</button>
-        <p class="submit-note">الدفع عند الاستلام · لا تنسَ إرسال صورة واضحة لشعرك في نفس المحادثة 📸</p>
+        <button type="submit" class="cta" data-i18n="submit">إرسال الطلب عبر واتساب</button>
+        <p class="submit-note" data-i18n="submitNote">الدفع عند الاستلام · لا تنسَ إرسال صورة واضحة لشعرك في نفس المحادثة 📸</p>
       </div>
 
       <div class="sent" id="sent" role="status" aria-live="polite">
-        <strong>تم تجهيز رسالتك ✨</strong><br>
-        اضغط زر الإرسال في واتساب، ثم أرسل صورة واضحة لشعرك وللفراغات في نفس المحادثة.
-        إذا لم يفتح واتساب، <a id="waFallback" href="#" target="_blank" rel="noopener">اضغط هنا</a> أو راسلنا على <span dir="ltr">05 49 48 58 69</span>.
+        <strong data-i18n="sentTitle">تم تجهيز رسالتك ✨</strong><br>
+        <span data-i18n="sentBody">اضغط زر الإرسال في واتساب، ثم أرسل صورة واضحة لشعرك وللفراغات في نفس المحادثة.</span>
+        <span data-i18n="sentFallback1">إذا لم يفتح واتساب،</span> <a id="waFallback" href="#" target="_blank" rel="noopener" data-i18n="sentFallbackLink">اضغط هنا</a> <span data-i18n="sentFallback2">أو راسلنا على</span> <span dir="ltr">05 49 48 58 69</span>.
       </div>
     </form>
   </div>
 </section>
+
+<script>
+/* ---------- translations: Arabic (default), French, English ---------- */
+window.LunaI18n = (() => {
+  const T = {
+    ar: {
+      docTitle: "لونا هير · زيت طبيعي لشعر طويل وقوي",
+      heroEyebrow: "إكسير لشعر طويل وقوي",
+      heroLede: "التميّز في خدمة شعرك.",
+      hint: "مرّر للأسفل",
+      b2Eyebrow: "طبيعي 100%",
+      b2Title: "عناية طبيعية <em>فاخرة</em>",
+      b2Lede: "زيت مصمَّم لشعر طويل وقوي ومليء بالحيوية.",
+      b3Eyebrow: "روتين العناية",
+      b3Title: "قطرة واحدة.<br><em>وتبدأ العناية.</em>",
+      b3Lede: "قطرة من الإكسير، ويبدأ روتين عنايتك.",
+      b4Eyebrow: "ما تبحث عنه",
+      resultsAria: "النمو، الكثافة، ملء الفراغات",
+      r1: "النمو", r2: "الكثافة", r3: "ملء الفراغات",
+      b5Eyebrow: "الطلب في الخاص",
+      b5Title: "إكسيرك<br><em>في انتظارك</em>",
+      fact1: "قارورة 60 مل", fact2: "التوصيل متوفر",
+      ctaOrder: "اطلب الآن",
+      contact: 'واتساب: <strong dir="ltr">05 49 48 58 69</strong><br>إنستغرام: Luna magic hair · فيسبوك: Huile Luna',
+      rail1: "التألق", rail2: "الروتين", rail3: "النتيجة", rail4: "الطلب",
+      loading: "جارٍ التحميل",
+      oTitle: "اطلبوا زيت لونا هير",
+      oSub: "الدفع عند الاستلام · التوصيل متوفر",
+      oIntro: "املأ المعلومات مرة واحدة، وتصلنا طلبيتك كاملة على واتساب. نرد عليك لنؤكد إذا كان الزيت يناسب حالتك وكم قارورة تحتاج. مرحباً بالرجال والنساء.",
+      n1: "١", n2: "٢", n3: "٣",
+      s1: "املأ الاستمارة واضغط إرسال",
+      s2: "يفتح واتساب برسالة جاهزة، أرسلها مع صورة واضحة لشعرك",
+      s3: "نرد عليك ونؤكد الطلب ثم نرسله لك",
+      lName: "الاسم واللقب", eName: "اكتب الاسم واللقب.",
+      lPhone: "رقم الهاتف", ePhone: "اكتب رقماً من 10 أرقام يبدأ بـ 05 أو 06 أو 07.",
+      lWilaya: "الولاية", pWilaya: "اختر الولاية", eWilaya: "اختر الولاية.",
+      lCommune: "البلدية", eCommune: "اكتب البلدية.",
+      lDelivery: "نوع التوصيل", dHome: "للمنزل", dDesk: "للمكتب (Stop desk)",
+      lAddress: "العنوان الكامل", phAddress: "الحي، رقم العمارة أو المنزل", eAddress: "اكتب العنوان الكامل للتوصيل إلى المنزل.",
+      lGender: "أنت", gF: "امرأة", gM: "رجل",
+      lSince: "منذ متى تلاحظ المشكلة؟", since1: "أقل من 6 أشهر", since2: "من 6 أشهر إلى سنة", since3: "أكثر من سنة",
+      lZones: "ماذا تريد أن تعالج؟", optZones: "(اختر واحداً أو أكثر)",
+      z1: "فراغات في مقدمة الرأس", z2: "فراغات في الجوانب", z3: "خفة أعلى الرأس", z4: "تساقط الشعر", z5: "تطويل وتكثيف الشعر",
+      eZones: "اختر واحداً على الأقل.",
+      lQty: "عدد القارورات", qAdvise: "لا أعرف، أريد نصيحتكم", q4: "4 أو أكثر",
+      lPhone2: "رقم هاتف ثانٍ", optional: "(اختياري)", ePhone2: "الرقم الثاني غير صحيح.",
+      lNote: "ملاحظة", phNote: "مثلاً: اتصلوا بعد الساعة 5 مساءً",
+      submit: "إرسال الطلب عبر واتساب",
+      submitNote: "الدفع عند الاستلام · لا تنسَ إرسال صورة واضحة لشعرك في نفس المحادثة 📸",
+      sentTitle: "تم تجهيز رسالتك ✨",
+      sentBody: "اضغط زر الإرسال في واتساب، ثم أرسل صورة واضحة لشعرك وللفراغات في نفس المحادثة.",
+      sentFallback1: "إذا لم يفتح واتساب،", sentFallbackLink: "اضغط هنا", sentFallback2: "أو راسلنا على",
+      footTag: "عناية طبيعية فاخرة · النمو • الكثافة • ملء الفراغات",
+      footContact: 'واتساب: <span dir="ltr">05 49 48 58 69</span><br>إنستغرام: Luna magic hair · فيسبوك: Huile Luna'
+    },
+    fr: {
+      docTitle: "Luna Hair · Élixir pour cheveux longs et forts",
+      heroEyebrow: "Élixir pour cheveux longs & forts",
+      heroLede: "L'excellence au service de vos cheveux.",
+      hint: "Faites défiler",
+      b2Eyebrow: "100 % naturel",
+      b2Title: "Soin naturel <em>haut de gamme</em>",
+      b2Lede: "Une huile pensée pour des cheveux longs, forts et pleins de vie.",
+      b3Eyebrow: "Le rituel",
+      b3Title: "Une goutte.<br><em>Un rituel.</em>",
+      b3Lede: "Une goutte d'élixir, et votre soin commence.",
+      b4Eyebrow: "Ce que vous recherchez",
+      resultsAria: "Pousse, densité, zones comblées",
+      r1: "Pousse", r2: "Densité", r3: "Zones comblées",
+      b5Eyebrow: "Commande en privé",
+      b5Title: "Votre élixir<br><em>vous attend</em>",
+      fact1: "Flacon 60 ml", fact2: "Livraison disponible",
+      ctaOrder: "Commander maintenant",
+      contact: "WhatsApp : <strong>05 49 48 58 69</strong><br>Instagram : Luna magic hair · Facebook : Huile Luna",
+      rail1: "Éclat", rail2: "Rituel", rail3: "Résultat", rail4: "Commande",
+      loading: "Chargement",
+      oTitle: "Commandez votre huile Luna Hair",
+      oSub: "Paiement à la livraison · Livraison disponible",
+      oIntro: "Remplissez vos informations une seule fois et votre commande complète nous arrive sur WhatsApp. Nous vous répondons pour confirmer si l'huile convient à votre cas et combien de flacons il vous faut. Hommes et femmes bienvenus.",
+      n1: "1", n2: "2", n3: "3",
+      s1: "Remplissez le formulaire et appuyez sur Envoyer",
+      s2: "WhatsApp s'ouvre avec un message prêt : envoyez-le avec une photo nette de vos cheveux",
+      s3: "Nous vous répondons, confirmons la commande et l'expédions",
+      lName: "Nom et prénom", eName: "Indiquez votre nom et prénom.",
+      lPhone: "Numéro de téléphone", ePhone: "Entrez un numéro de 10 chiffres commençant par 05, 06 ou 07.",
+      lWilaya: "Wilaya", pWilaya: "Choisissez votre wilaya", eWilaya: "Choisissez votre wilaya.",
+      lCommune: "Commune", eCommune: "Indiquez votre commune.",
+      lDelivery: "Livraison", dHome: "À domicile", dDesk: "Au bureau (Stop desk)",
+      lAddress: "Adresse complète", phAddress: "Quartier, n° de bâtiment ou de maison", eAddress: "Indiquez l'adresse complète pour la livraison à domicile.",
+      lGender: "Vous êtes", gF: "Une femme", gM: "Un homme",
+      lSince: "Depuis quand ?", since1: "Moins de 6 mois", since2: "De 6 mois à 1 an", since3: "Plus d'un an",
+      lZones: "Que souhaitez-vous traiter ?", optZones: "(un ou plusieurs choix)",
+      z1: "Zones dégarnies à l'avant", z2: "Zones dégarnies sur les côtés", z3: "Cheveux clairsemés sur le dessus", z4: "Chute de cheveux", z5: "Longueur et densité",
+      eZones: "Choisissez au moins une option.",
+      lQty: "Nombre de flacons", qAdvise: "Je ne sais pas, conseillez-moi", q4: "4 ou plus",
+      lPhone2: "Deuxième numéro", optional: "(facultatif)", ePhone2: "Le deuxième numéro n'est pas valide.",
+      lNote: "Remarque", phNote: "Ex. : appelez-moi après 17 h",
+      submit: "Envoyer ma commande sur WhatsApp",
+      submitNote: "Paiement à la livraison · N'oubliez pas d'envoyer une photo nette de vos cheveux dans la même conversation 📸",
+      sentTitle: "Votre message est prêt ✨",
+      sentBody: "Appuyez sur Envoyer dans WhatsApp, puis envoyez une photo nette de vos cheveux et des zones dégarnies dans la même conversation.",
+      sentFallback1: "Si WhatsApp ne s'ouvre pas,", sentFallbackLink: "cliquez ici", sentFallback2: "ou écrivez-nous au",
+      footTag: "Soin naturel haut de gamme · Pousse • Densité • Zones comblées",
+      footContact: "WhatsApp : 05 49 48 58 69<br>Instagram : Luna magic hair · Facebook : Huile Luna"
+    },
+    en: {
+      docTitle: "Luna Hair · Elixir for Long & Strong Hair",
+      heroEyebrow: "Elixir for Long & Strong Hair",
+      heroLede: "Excellence, devoted to your hair.",
+      hint: "Scroll",
+      b2Eyebrow: "100% natural",
+      b2Title: "Premium <em>natural care</em>",
+      b2Lede: "An oil made for long, strong, vibrant hair.",
+      b3Eyebrow: "The ritual",
+      b3Title: "One drop.<br><em>One ritual.</em>",
+      b3Lede: "One drop of elixir, and your care begins.",
+      b4Eyebrow: "What you're looking for",
+      resultsAria: "Growth, density, gaps filled",
+      r1: "Growth", r2: "Density", r3: "Gaps filled",
+      b5Eyebrow: "Private orders",
+      b5Title: "Your elixir<br><em>awaits</em>",
+      fact1: "60 ml bottle", fact2: "Delivery available",
+      ctaOrder: "Order now",
+      contact: "WhatsApp: <strong>05 49 48 58 69</strong><br>Instagram: Luna magic hair · Facebook: Huile Luna",
+      rail1: "Glow", rail2: "Ritual", rail3: "Results", rail4: "Order",
+      loading: "Loading",
+      oTitle: "Order your Luna Hair oil",
+      oSub: "Cash on delivery · Delivery available",
+      oIntro: "Fill in your details once and your full order reaches us on WhatsApp. We'll reply to confirm whether the oil suits you and how many bottles you need. Men and women welcome.",
+      n1: "1", n2: "2", n3: "3",
+      s1: "Fill in the form and tap Send",
+      s2: "WhatsApp opens with your message ready: send it with a clear photo of your hair",
+      s3: "We reply, confirm your order and ship it",
+      lName: "Full name", eName: "Enter your full name.",
+      lPhone: "Phone number", ePhone: "Enter a 10-digit number starting with 05, 06 or 07.",
+      lWilaya: "Wilaya (province)", pWilaya: "Choose your wilaya", eWilaya: "Choose your wilaya.",
+      lCommune: "Commune (town)", eCommune: "Enter your commune.",
+      lDelivery: "Delivery", dHome: "Home delivery", dDesk: "Pick-up office (Stop desk)",
+      lAddress: "Full address", phAddress: "Neighbourhood, building or house number", eAddress: "Enter your full address for home delivery.",
+      lGender: "You are", gF: "A woman", gM: "A man",
+      lSince: "How long has this been going on?", since1: "Less than 6 months", since2: "6 months to a year", since3: "More than a year",
+      lZones: "What would you like to treat?", optZones: "(choose one or more)",
+      z1: "Thinning at the hairline", z2: "Thinning at the temples", z3: "Thin hair on top", z4: "Hair loss", z5: "Length and thickness",
+      eZones: "Choose at least one.",
+      lQty: "Number of bottles", qAdvise: "Not sure, please advise me", q4: "4 or more",
+      lPhone2: "Second phone number", optional: "(optional)", ePhone2: "The second number isn't valid.",
+      lNote: "Note", phNote: "E.g. call me after 5 pm",
+      submit: "Send my order on WhatsApp",
+      submitNote: "Cash on delivery · Remember to send a clear photo of your hair in the same chat 📸",
+      sentTitle: "Your message is ready ✨",
+      sentBody: "Tap Send in WhatsApp, then send a clear photo of your hair and the thinning areas in the same chat.",
+      sentFallback1: "If WhatsApp didn't open,", sentFallbackLink: "tap here", sentFallback2: "or message us on",
+      footTag: "Premium natural hair care · Growth • Density • Gaps filled",
+      footContact: "WhatsApp: 05 49 48 58 69<br>Instagram: Luna magic hair · Facebook: Huile Luna"
+    }
+  };
+
+  const KEY = "luna-lang";
+  const listeners = [];
+  let lang = "ar";
+  try { const saved = localStorage.getItem(KEY); if (T[saved]) lang = saved; } catch (e) {}
+
+  const t = k => (T[lang] && T[lang][k]) ?? T.ar[k] ?? "";
+
+  function apply(next) {
+    if (T[next]) lang = next;
+    const root = document.documentElement;
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    document.title = t("docTitle");
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
+    document.querySelectorAll(".lang-switch button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    listeners.forEach(fn => fn(lang));
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(b => b.addEventListener("click", () => apply(b.dataset.lang)));
+  apply(lang);
+
+  return { t, apply, get lang() { return lang; }, onChange: fn => listeners.push(fn) };
+})();
+</script>
 
 <script>
 (() => {
@@ -508,14 +735,31 @@
 
   const form = document.getElementById("orderForm");
   const F = form.elements;
+  // Latin spellings for the French and English versions, same order as WILAYAS.
+  const WILAYAS_LATIN = ["Adrar","Chlef","Laghouat","Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida","Bouira",
+    "Tamanrasset","Tébessa","Tlemcen","Tiaret","Tizi Ouzou","Alger","Djelfa","Jijel","Sétif","Saïda",
+    "Skikda","Sidi Bel Abbès","Annaba","Guelma","Constantine","Médéa","Mostaganem","M'Sila","Mascara","Ouargla",
+    "Oran","El Bayadh","Illizi","Bordj Bou Arréridj","Boumerdès","El Tarf","Tindouf","Tissemsilt","El Oued","Khenchela",
+    "Souk Ahras","Tipaza","Mila","Aïn Defla","Naâma","Aïn Témouchent","Ghardaïa","Relizane","Timimoun","Bordj Badji Mokhtar",
+    "Ouled Djellal","Béni Abbès","In Salah","In Guezzam","Touggourt","Djanet","El M'Ghair","El Meniaa",
+    "Aflou","Barika","El Kantara","Bir El Ater","El Aricha","Ksar Chellala","Aïn Oussera","Messaad","Ksar El Boukhari","Bou Saâda","El Abiodh Sidi Cheikh"];
+
   const sel = document.getElementById("f-wilaya");
-  WILAYAS.forEach((name, i) => {
-    const o = document.createElement("option");
-    const code = String(i + 1).padStart(2, "0");
-    o.value = `${code} - ${name}`;
-    o.textContent = `${code} - ${name}`;
-    sel.appendChild(o);
-  });
+  const code = i => String(i + 1).padStart(2, "0");
+  function renderWilayas(lang) {
+    const names = lang === "ar" ? WILAYAS : WILAYAS_LATIN;
+    const chosen = sel.value;
+    sel.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
+    names.forEach((name, i) => {
+      const o = document.createElement("option");
+      o.value = String(i);                       // index; the WhatsApp message always uses the Arabic name
+      o.textContent = `${code(i)} - ${name}`;
+      sel.appendChild(o);
+    });
+    sel.value = chosen;
+  }
+  renderWilayas(window.LunaI18n.lang);
+  window.LunaI18n.onChange(renderWilayas);
 
   const addressField = document.getElementById("addressField");
   const addressInput = document.getElementById("f-address");
@@ -567,7 +811,7 @@
     ];
     if (F.phone2.value.trim()) lines.push(`📞 هاتف ثانٍ: ${prettyPhone(F.phone2.value)}`);
     lines.push(
-      `📍 الولاية: ${F.wilaya.value}`,
+      `📍 الولاية: ${code(+F.wilaya.value)} - ${WILAYAS[+F.wilaya.value]}`,
       `🏘️ البلدية: ${F.commune.value.trim()}`,
       `🚚 التوصيل: ${F.delivery.value}`
     );
@@ -600,9 +844,9 @@
 <footer>
   <div>
     <div class="mark"><i>Luna</i> Hair</div>
-    Soin naturel haut de gamme · Pousse • Densité • Zones comblées
+    <span data-i18n="footTag">Soin naturel haut de gamme · Pousse • Densité • Zones comblées</span>
   </div>
-  <div>
+  <div data-i18n-html="footContact">
     WhatsApp : 05 49 48 58 69<br>
     Instagram : Luna magic hair · Facebook : Huile Luna
   </div>
@@ -641,7 +885,7 @@
   }
   function updateLoader() {
     const pct = Math.round(loaded / FRAME_COUNT * 100);
-    loader.textContent = `Chargement ${pct} %`;
+    loader.textContent = `${window.LunaI18n.t("loading")} ${pct} %`;
     if (loaded >= FRAME_COUNT) loader.style.opacity = 0;
   }
   async function loadAll() {

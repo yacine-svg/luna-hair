@@ -12,6 +12,10 @@ Scrolling plays a 21.6-second product film forwards and backwards, with French t
 - On tall phone screens, the film sits in the top 62% of the screen and the text sits below it.
 - No build step and no dependencies: a static site (Google Fonts only).
 
+## Languages
+
+Arabic (default, right-to-left), French and English, switched with the ع / FR / EN control in the top corner. The choice is remembered in the visitor's browser. All strings live in the `T` object inside `window.LunaI18n` in `index.html`; elements opt in with `data-i18n` (text), `data-i18n-html` (markup), `data-i18n-ph` (placeholder) or `data-i18n-aria`. The WhatsApp order message is always written in Arabic, whatever language the visitor uses.
+
 ## Order form
 
 The `#commande` section (Arabic, right-to-left) collects everything the client used to ask for over three messages: name, phone (validated as 05/06/07 + 8 digits), wilaya (all 69), commune, delivery type (home or stop desk), address, gender, areas to treat, how long, number of bottles (or "advise me") and an optional note.
