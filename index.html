@@ -6,7 +6,7 @@
 <title>Luna Hair Scroll Story</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   /* Layout idea: one sticky full-screen canvas scrubbed by scroll; French titles fade in
      over the empty side of each shot, and the order panel lands on the dark left half of the final frame. */
@@ -183,6 +183,110 @@
     transition: opacity .6s ease;
   }
 
+  /* ---------- order form (Arabic, right-to-left) ---------- */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .order-section {
+    --font-ar-display: "Amiri", "Noto Naskh Arabic", serif;
+    --font-ar: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+    --field: #14100c;
+    --line: rgba(214,176,106,.28);
+    --error: #e88a74;
+    position: relative;
+    padding: clamp(64px, 10vw, 120px) clamp(16px, 6vw, 96px);
+    background:
+      radial-gradient(60% 50% at 85% 0%, rgba(122,69,20,.28), transparent 70%),
+      var(--night);
+    font-family: var(--font-ar);
+  }
+  .order-wrap {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(32px, 6vw, 80px); align-items: start;
+  }
+  .order-intro h2 {
+    font-family: var(--font-ar-display);
+    font-size: clamp(38px, 5vw, 58px); line-height: 1.25; font-weight: 700;
+  }
+  .order-intro .fr {
+    margin: 10px 0 0; font-family: var(--font-display); font-style: italic;
+    font-size: 20px; color: var(--gold);
+  }
+  .order-intro p { font-size: 17px; line-height: 1.9; color: var(--text); margin: 22px 0 0; max-width: 34ch; }
+  .steps { list-style: none; padding: 0; margin: 34px 0 0; display: grid; gap: 14px; }
+  .steps li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; font-size: 16px; line-height: 1.6; }
+  .steps b {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--gold); color: var(--gold-pale);
+    font-family: var(--font-display); font-size: 20px; font-weight: 400;
+  }
+  .order-form {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px 18px;
+    padding: clamp(20px, 3vw, 34px);
+    border: 1px solid var(--line); border-radius: 18px;
+    background: rgba(20,16,12,.7);
+  }
+  .field { display: grid; gap: 8px; align-content: start; }
+  .field.full { grid-column: 1 / -1; }
+  .field[hidden] { display: none; }
+  .field > label, .field > .label {
+    font-size: 15px; font-weight: 500; color: var(--gold-pale);
+  }
+  .field .opt { color: var(--muted); font-weight: 300; font-size: 13px; }
+  .order-form input[type="text"], .order-form input[type="tel"], .order-form select, .order-form textarea {
+    width: 100%;
+    font: inherit; font-size: 16px; color: var(--text);
+    background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 13px 14px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .order-form input[type="tel"] { direction: ltr; text-align: right; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+  .order-form textarea { min-height: 84px; resize: vertical; }
+  .order-form select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position: 18px 55%, 12px 55%;
+    background-size: 6px 6px; background-repeat: no-repeat;
+    padding-left: 34px;
+  }
+  .order-form input:focus, .order-form select:focus, .order-form textarea:focus {
+    outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(214,176,106,.18);
+  }
+  .field.invalid input, .field.invalid select, .field.invalid textarea, .field.invalid .chips { border-color: var(--error); }
+  .err { display: none; font-size: 13px; color: var(--error); }
+  .field.invalid .err { display: block; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; border: 1px solid transparent; border-radius: 12px; }
+  .chip { position: relative; }
+  .chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip span {
+    display: block; padding: 10px 16px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--field);
+    font-size: 15px; color: var(--text); cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .chip input:checked + span { background: rgba(214,176,106,.16); border-color: var(--gold); color: var(--gold-pale); }
+  .chip input:focus-visible + span { outline: 2px solid var(--gold-pale); outline-offset: 2px; }
+  .submit-row { grid-column: 1 / -1; display: grid; gap: 12px; margin-top: 6px; }
+  .order-form .cta { margin-top: 0; justify-content: center; border: 0; cursor: pointer; font-family: var(--font-ar); font-size: 17px; font-weight: 700; letter-spacing: 0; }
+  .submit-note { margin: 0; font-size: 14px; line-height: 1.7; color: var(--muted); text-align: center; }
+  .sent {
+    display: none; grid-column: 1 / -1;
+    padding: 18px 20px; border-radius: 12px;
+    border: 1px solid var(--gold); background: rgba(214,176,106,.1);
+    font-size: 16px; line-height: 1.8;
+  }
+  .sent.show { display: block; }
+  .sent strong { color: var(--gold-pale); }
+  .sent a { color: var(--gold); }
+  @media (max-width: 860px) {
+    .order-wrap { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .order-form { grid-template-columns: 1fr; }
+  }
+
   /* ---------- footer after the story ---------- */
   footer {
     position: relative;
@@ -256,8 +360,7 @@
         <li>Flacon 60 ml</li>
         <li>Livraison disponible</li>
       </ul>
-      <!-- WhatsApp number from the Luna Hair business card -->
-      <a class="cta" href="https://wa.me/213549485869" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+      <a class="cta" href="#commande">Commander maintenant</a>
       <p class="contact">
         WhatsApp : <strong>05 49 48 58 69</strong><br>
         Instagram : Luna magic hair · Facebook : Huile Luna
@@ -277,6 +380,222 @@
     <div class="progress" id="progress"></div>
   </div>
 </section>
+
+<section class="order-section" id="commande" dir="rtl" lang="ar" aria-labelledby="orderTitle">
+  <div class="order-wrap">
+    <div class="order-intro">
+      <h2 id="orderTitle">اطلبوا زيت لونا هير</h2>
+      <p class="fr">Commande en privé · Livraison disponible</p>
+      <p>املأ المعلومات مرة واحدة، وتصلنا طلبيتك كاملة على واتساب. نرد عليك لنؤكد إذا كان الزيت يناسب حالتك وكم قارورة تحتاج. مرحباً بالرجال والنساء.</p>
+      <ol class="steps">
+        <li><b>١</b> املأ الاستمارة واضغط إرسال</li>
+        <li><b>٢</b> يفتح واتساب برسالة جاهزة، أرسلها مع صورة واضحة لشعرك</li>
+        <li><b>٣</b> نرد عليك ونؤكد الطلب ثم نرسله لك</li>
+      </ol>
+    </div>
+
+    <form class="order-form" id="orderForm" novalidate>
+      <div class="field">
+        <label for="f-name">الاسم واللقب</label>
+        <input type="text" id="f-name" name="name" autocomplete="name" required>
+        <span class="err">اكتب الاسم واللقب.</span>
+      </div>
+      <div class="field">
+        <label for="f-phone">رقم الهاتف</label>
+        <input type="tel" id="f-phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="0550 12 34 56" required>
+        <span class="err">اكتب رقماً من 10 أرقام يبدأ بـ 05 أو 06 أو 07.</span>
+      </div>
+
+      <div class="field">
+        <label for="f-wilaya">الولاية</label>
+        <select id="f-wilaya" name="wilaya" required><option value="">اختر الولاية</option></select>
+        <span class="err">اختر الولاية.</span>
+      </div>
+      <div class="field">
+        <label for="f-commune">البلدية</label>
+        <input type="text" id="f-commune" name="commune" required>
+        <span class="err">اكتب البلدية.</span>
+      </div>
+
+      <div class="field full">
+        <span class="label" id="l-delivery">نوع التوصيل</span>
+        <div class="chips" role="radiogroup" aria-labelledby="l-delivery">
+          <label class="chip"><input type="radio" name="delivery" value="للمنزل" checked><span>للمنزل</span></label>
+          <label class="chip"><input type="radio" name="delivery" value="للمكتب (Stop desk)"><span>للمكتب (Stop desk)</span></label>
+        </div>
+      </div>
+      <div class="field full" id="addressField">
+        <label for="f-address">العنوان الكامل</label>
+        <input type="text" id="f-address" name="address" autocomplete="street-address" placeholder="الحي، رقم العمارة أو المنزل">
+        <span class="err">اكتب العنوان الكامل للتوصيل إلى المنزل.</span>
+      </div>
+
+      <div class="field">
+        <span class="label" id="l-gender">أنت</span>
+        <div class="chips" role="radiogroup" aria-labelledby="l-gender">
+          <label class="chip"><input type="radio" name="gender" value="امرأة" checked><span>امرأة</span></label>
+          <label class="chip"><input type="radio" name="gender" value="رجل"><span>رجل</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-since">منذ متى تلاحظ المشكلة؟</label>
+        <select id="f-since" name="since">
+          <option value="أقل من 6 أشهر">أقل من 6 أشهر</option>
+          <option value="من 6 أشهر إلى سنة">من 6 أشهر إلى سنة</option>
+          <option value="أكثر من سنة">أكثر من سنة</option>
+        </select>
+      </div>
+
+      <div class="field full" id="zonesField">
+        <span class="label" id="l-zones">ماذا تريد أن تعالج؟ <span class="opt">(اختر واحداً أو أكثر)</span></span>
+        <div class="chips" aria-labelledby="l-zones">
+          <label class="chip"><input type="checkbox" name="zones" value="فراغات في مقدمة الرأس"><span>فراغات في مقدمة الرأس</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="فراغات في الجوانب"><span>فراغات في الجوانب</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="خفة أعلى الرأس"><span>خفة أعلى الرأس</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="تساقط الشعر"><span>تساقط الشعر</span></label>
+          <label class="chip"><input type="checkbox" name="zones" value="تطويل وتكثيف الشعر"><span>تطويل وتكثيف الشعر</span></label>
+        </div>
+        <span class="err">اختر واحداً على الأقل.</span>
+      </div>
+
+      <div class="field">
+        <label for="f-qty">عدد القارورات</label>
+        <select id="f-qty" name="qty">
+          <option value="لا أعرف، أريد نصيحتكم">لا أعرف، أريد نصيحتكم</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4 أو أكثر">4 أو أكثر</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-phone2">رقم هاتف ثانٍ <span class="opt">(اختياري)</span></label>
+        <input type="tel" id="f-phone2" name="phone2" inputmode="numeric" placeholder="0660 12 34 56">
+        <span class="err">الرقم الثاني غير صحيح.</span>
+      </div>
+      <div class="field full">
+        <label for="f-note">ملاحظة <span class="opt">(اختياري)</span></label>
+        <textarea id="f-note" name="note" placeholder="مثلاً: اتصلوا بعد الساعة 5 مساءً"></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="cta">إرسال الطلب عبر واتساب</button>
+        <p class="submit-note">الدفع عند الاستلام · لا تنسَ إرسال صورة واضحة لشعرك في نفس المحادثة 📸</p>
+      </div>
+
+      <div class="sent" id="sent" role="status" aria-live="polite">
+        <strong>تم تجهيز رسالتك ✨</strong><br>
+        اضغط زر الإرسال في واتساب، ثم أرسل صورة واضحة لشعرك وللفراغات في نفس المحادثة.
+        إذا لم يفتح واتساب، <a id="waFallback" href="#" target="_blank" rel="noopener">اضغط هنا</a> أو راسلنا على <span dir="ltr">05 49 48 58 69</span>.
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+(() => {
+  // WhatsApp number from the Luna Hair business card (0549485869), in international format.
+  const WHATSAPP = "213549485869";
+
+  // 69 wilayas: 01–58, plus the 11 created in Nov 2025 (numbers fixed by decree, June 2026).
+  const WILAYAS = ["أدرار","الشلف","الأغواط","أم البواقي","باتنة","بجاية","بسكرة","بشار","البليدة","البويرة",
+    "تمنراست","تبسة","تلمسان","تيارت","تيزي وزو","الجزائر","الجلفة","جيجل","سطيف","سعيدة",
+    "سكيكدة","سيدي بلعباس","عنابة","قالمة","قسنطينة","المدية","مستغانم","المسيلة","معسكر","ورقلة",
+    "وهران","البيض","إليزي","برج بوعريريج","بومرداس","الطارف","تندوف","تيسمسيلت","الوادي","خنشلة",
+    "سوق أهراس","تيبازة","ميلة","عين الدفلى","النعامة","عين تموشنت","غرداية","غليزان","تيميمون","برج باجي مختار",
+    "أولاد جلال","بني عباس","عين صالح","عين قزام","تقرت","جانت","المغير","المنيعة",
+    "أفلو","بريكة","القنطرة","بئر العاتر","العريشة","قصر الشلالة","عين وسارة","مسعد","قصر البخاري","بوسعادة","الأبيض سيدي الشيخ"];
+
+  const form = document.getElementById("orderForm");
+  const F = form.elements;
+  const sel = document.getElementById("f-wilaya");
+  WILAYAS.forEach((name, i) => {
+    const o = document.createElement("option");
+    const code = String(i + 1).padStart(2, "0");
+    o.value = `${code} - ${name}`;
+    o.textContent = `${code} - ${name}`;
+    sel.appendChild(o);
+  });
+
+  const addressField = document.getElementById("addressField");
+  const addressInput = document.getElementById("f-address");
+  function syncDelivery() {
+    const home = F.delivery.value === "للمنزل";
+    addressField.hidden = !home;
+    addressInput.required = home;
+  }
+  form.querySelectorAll('input[name="delivery"]').forEach(r => r.addEventListener("change", syncDelivery));
+  syncDelivery();
+
+  const digits = v => v.replace(/\D/g, "").replace(/^213/, "0");
+  const validPhone = v => /^0[567]\d{8}$/.test(digits(v));
+  const prettyPhone = v => digits(v).replace(/^(\d{4})(\d{2})(\d{2})(\d{2})$/, "$1 $2 $3 $4");
+
+  function setInvalid(field, bad) { field.classList.toggle("invalid", bad); return bad; }
+
+  function validate() {
+    let firstBad = null;
+    const check = (el, bad) => {
+      const field = el.closest(".field");
+      if (setInvalid(field, bad) && !firstBad) firstBad = el;
+    };
+    check(F.name, F.name.value.trim().length < 3);
+    check(F.phone, !validPhone(F.phone.value));
+    check(F.wilaya, !F.wilaya.value);
+    check(F.commune, F.commune.value.trim().length < 2);
+    if (!addressField.hidden) check(addressInput, addressInput.value.trim().length < 5);
+    else setInvalid(addressField, false);
+    const zones = [...form.querySelectorAll('input[name="zones"]:checked')];
+    check(form.querySelector('input[name="zones"]'), zones.length === 0);
+    check(F.phone2, F.phone2.value.trim() !== "" && !validPhone(F.phone2.value));
+    return firstBad;
+  }
+
+  // clear an error as soon as the person fixes it
+  form.addEventListener("input", e => {
+    const field = e.target.closest(".field");
+    if (field && field.classList.contains("invalid")) validate();
+  });
+
+  function buildMessage() {
+    const zones = [...form.querySelectorAll('input[name="zones"]:checked')].map(z => z.value).join("، ");
+    const lines = [
+      "🌙 طلب جديد – Luna Hair",
+      "",
+      `👤 الاسم: ${F.name.value.trim()}`,
+      `📞 الهاتف: ${prettyPhone(F.phone.value)}`,
+    ];
+    if (F.phone2.value.trim()) lines.push(`📞 هاتف ثانٍ: ${prettyPhone(F.phone2.value)}`);
+    lines.push(
+      `📍 الولاية: ${F.wilaya.value}`,
+      `🏘️ البلدية: ${F.commune.value.trim()}`,
+      `🚚 التوصيل: ${F.delivery.value}`
+    );
+    if (!addressField.hidden) lines.push(`🏠 العنوان: ${addressInput.value.trim()}`);
+    lines.push(
+      "",
+      `🧑 أنا: ${F.gender.value}`,
+      `💇 أريد معالجة: ${zones}`,
+      `⏳ منذ: ${F.since.value}`,
+      `🧴 عدد القارورات: ${F.qty.value}`
+    );
+    if (F.note.value.trim()) lines.push(`📝 ملاحظة: ${F.note.value.trim()}`);
+    lines.push("", "📸 سأرسل صورة شعري الآن.");
+    return lines.join("\n");
+  }
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const bad = validate();
+    if (bad) { bad.focus({ preventScroll: false }); return; }
+    const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(buildMessage())}`;
+    document.getElementById("waFallback").href = url;
+    document.getElementById("sent").classList.add("show");
+    const w = window.open(url, "_blank");
+    if (w) w.opener = null; else window.location.href = url;
+  });
+})();
+</script>
 
 <footer>
   <div>
